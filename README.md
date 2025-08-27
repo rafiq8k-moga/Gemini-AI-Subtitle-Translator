@@ -1,5 +1,7 @@
 # AI Subtitle Translator (.ass) via Gemini API
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rafiq8k-moga/Gemini-AI-Subtitle-Translator/blob/main/Subtitle_ass_Translator.ipynb)
+
 Proyek ini adalah sebuah *tool* canggih untuk menerjemahkan file subtitle berformat Advanced SubStation Alpha (`.ass`) secara otomatis menggunakan kekuatan model AI generatif dari Google, yaitu Gemini.
 
 Merupakan evolusi signifikan dari proyek sebelumnya, [`Gemini-TXT-Translator`](https://www.google.com/search?q=%5Bhttps://github.com/rafiq8k-moga/Gemini-TXT-Translator%5D\(https://github.com/rafiq8k-moga/Gemini-TXT-Translator\)), tool ini dirancang untuk mengatasi kelemahan utama dari versi lama. Sebelumnya di `Gemini-TXT-Translator`, proses terjemahan menggunakan sistem per baris pada file `.txt` biasa, sebuah proses yang bisa sangat melelahkan dan menghilangkan semua konteks format subtitle.
