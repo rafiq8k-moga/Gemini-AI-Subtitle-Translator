@@ -1,4 +1,5 @@
 # AI Subtitle Translator (.ass) via Gemini API
+<div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCpYZJSeNA4CfnziMiNYjgyZXR-lEwsAAvK3Ax9kji4_XVmriXKT9HyyfwG0MezB5ppiDnO8zTRXTfLMdMQk4SFoB44TgJ4MZDIRCSQc90R7-XDvZ5aYRo6J7sXkSMgeH1as-qRdzhcgCEWJIW96PWzeWXzIYRFQfa7GAQQ5zNQ-CRW_GNbT1eVdQATw/s1600/a2d6175edcd2c3d7fb.gradio.live_.png" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" data-original-height="905" data-original-width="1351" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCpYZJSeNA4CfnziMiNYjgyZXR-lEwsAAvK3Ax9kji4_XVmriXKT9HyyfwG0MezB5ppiDnO8zTRXTfLMdMQk4SFoB44TgJ4MZDIRCSQc90R7-XDvZ5aYRo6J7sXkSMgeH1as-qRdzhcgCEWJIW96PWzeWXzIYRFQfa7GAQQ5zNQ-CRW_GNbT1eVdQATw/s1600/a2d6175edcd2c3d7fb.gradio.live_.png"/></a></div>
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rafiq8k-moga/Gemini-AI-Subtitle-Translator/blob/main/Subtitle_ass_Translator.ipynb)
 
