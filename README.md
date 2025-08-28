@@ -12,12 +12,13 @@ Aplikasi baru ini, yang dibangun dengan Gradio dan dirancang untuk berjalan di G
 
 Tool ini dibangun untuk merevolusi proses fansubbing dengan AI, berikut adalah keunggulannya:
 
-  * **Pemahaman Format `.ass` Cerdas**: Tidak seperti versi sebelumnya, tool ini secara cerdas mem-parsing file `.ass`, hanya mengambil teks dialog untuk diterjemahkan, sementara **menjaga semua metadata penting** seperti timing, style, positioning, dan efek tetap utuh.
-  * **Terjemahan Batch (Kelompok)**: Proses terjemahan tidak lagi dilakukan baris per baris. Aplikasi ini mengirimkan dialog dalam kelompok (misalnya, 100 baris per permintaan), membuatnya **jauh lebih cepat dan efisien** dalam menggunakan API.
-  * **Antarmuka Web Interaktif (Gradio)**: Lupakan proses manual salin-tempel ke file teks. Semua interaksi dilakukan melalui antarmuka web yang bersih dan intuitif langsung di dalam notebook Colab.
-  * **Live Logging Real-time**: Anda tidak akan lagi bertanya-tanya apakah prosesnya berjalan atau tidak. Sidebar "Live Log" akan memberi Anda **update status secara langsung** untuk setiap langkah, mulai dari membaca file hingga setiap batch yang selesai diterjemahkan.
-  * **Kontrol Penuh atas AI**: Anda bisa memberikan **konteks** (seperti nama karakter atau istilah khusus) dan **instruksi gaya bahasa** untuk mengarahkan AI agar menghasilkan terjemahan yang lebih akurat dan konsisten.
-  * **Portabel dan Tanpa Setup**: Dijalankan sepenuhnya di **Google Colab**, Anda tidak perlu melakukan instalasi Python atau library yang rumit di komputer Anda. Cukup buka, jalankan, dan gunakan.
+  * **Pemahaman Format `.ass` Cerdas**: Tool ini mem-parsing file `.ass` dan hanya mengambil teks dialog untuk diterjemahkan, **menjaga semua metadata penting** seperti timing, style, positioning, dan efek tetap utuh.
+  * **Konteks Episode**: Anda dapat membuat **ringkasan konteks dari episode sebelumnya** sehingga AI lebih konsisten dalam menerjemahkan episode selanjutnya.
+  * **Terjemahan Batch (Kelompok)**: Proses terjemahan tidak lagi dilakukan baris per baris. Dialog dikirim dalam kelompok (misalnya, 100 baris per permintaan), membuatnya **lebih cepat dan efisien**.
+  * **Antarmuka Web Interaktif (Gradio)**: Semua interaksi dilakukan melalui antarmuka web yang bersih langsung di Colab.
+  * **Live Logging Real-time**: Sidebar "Live Log" menampilkan update status setiap langkah, mulai dari membaca file hingga batch selesai diterjemahkan.
+  * **Kontrol Penuh atas AI**: Anda bisa memberikan **konteks** (nama karakter, istilah khusus) dan **instruksi tambahan** untuk hasil terjemahan lebih akurat.
+  * **Portabel dan Tanpa Setup**: Dijalankan sepenuhnya di **Google Colab**, tanpa perlu instalasi Python atau library tambahan.
 
 ## Panduan Penggunaan
 
@@ -25,51 +26,43 @@ Ikuti langkah-langkah sederhana ini untuk memulai.
 
 ### Langkah 0: (Penting) Siapkan File Subtitle Anda
 
-File `.ass` seringkali berisi baris-baris kompleks yang bukan merupakan dialog lisan, seperti template karaoke (KFX), motion graphic, atau *shape*.
+File `.ass` seringkali berisi baris-baris kompleks yang bukan dialog lisan, seperti template karaoke (KFX), motion graphic, atau *shape*.  
 
-**Kabar baiknya, parser di tool ini sudah cukup cerdas.** Ia secara spesifik hanya akan mencari dan menerjemahkan baris yang diawali dengan `Dialogue:`. Baris lain akan diabaikan oleh proses terjemahan dan akan tetap ada di file hasil akhir, sehingga semua efek visual Anda aman.
+Parser tool ini **hanya akan menerjemahkan baris yang diawali `Dialogue:`**, baris lain akan tetap ada di file hasil akhir.  
 
-Namun, jika ada baris `Dialogue:` yang berisi kode atau teks yang tidak ingin Anda terjemahkan (misalnya, teks pada papan tanda atau efek khusus), Anda bisa dengan mudah menyuruh tool ini untuk melewatinya.
+Jika ada baris `Dialogue:` yang tidak ingin diterjemahkan, bisa diabaikan manual di editor subtitle seperti **Aegisub**.
 
-**Caranya:** Buka file `.ass` Anda di editor subtitle (seperti Aegisub),![Capture.PNG](https://raw.githubusercontent.com/rafiq8k-moga/Gemini-AI-Subtitle-Translator/refs/heads/main/comment.png)
+### Langkah 1: Jalankan Cell Context
 
-Dengan begitu, Anda bisa memastikan hanya dialog yang relevan yang akan dikirim ke AI.
+Sebelum menerjemahkan, **jalankan cell Context** untuk membuat ringkasan konteks dari episode sebelumnya.  
+Ini penting agar AI memahami alur cerita, karakter, dan istilah khusus sebelum menerjemahkan episode baru.  
 
-### Langkah 1: Buka Notebook & Siapkan API Key
+1. Unggah file `.ass` episode saat ini.
+2. Opsional: unggah file `.txt` konteks episode sebelumnya.
+3. Pilih model AI.
+4. Isi instruksi tambahan (opsional).
+5. Klik **Buat Konteks**. Hasil ringkasan akan muncul dan bisa diunduh.
 
-1.  Buka notebook ini lewat tombol berikut [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rafiq8k-moga/Gemini-AI-Subtitle-Translator/blob/main/Subtitle_ass_Translator.ipynb)
-.
-2.  Siapkan API Key Gemini Anda. Cara paling aman adalah menggunakan fitur **Secrets** di Colab:
-      * Klik ikon **kunci (🔑)** di sidebar kiri.
-      * Klik **"Add a new secret"**.
-      * **Name:** `GEMINI_API_KEY`
-      * **Value:** Tempel API Key Anda di sini.
-      * Nyalakan tombol **"Notebook access"**.
+### Langkah 2: Jalankan Cell Translator
 
-### Langkah 2: Jalankan Semua Sel
+Setelah konteks dibuat, jalankan cell Translator untuk menerjemahkan episode.  
 
-Jalankan sel-sel di notebook secara berurutan dari atas ke bawah, dimulai dari sel instalasi hingga sel terakhir yang akan meluncurkan aplikasi Gradio.
-
-### Langkah 3: Gunakan Antarmuka Gradio
-
-Setelah sel terakhir dijalankan, sebuah antarmuka web akan muncul. Gunakan URL publik yang tersedia untuk membukanya di tab baru.
-
-1.  **Unggah File**: Klik dan pilih file `.ass` yang ingin Anda terjemahkan.
-2.  **Atur Bahasa**: Tentukan bahasa sumber dan target.
-3.  **Pilih Model**: Pilih model AI yang ingin digunakan. "2.0 Flash" direkomendasikan untuk pengguna gratis karena batas kuotanya lebih longgar.
-4.  **Isi Konteks & Instruksi (Opsional)**: Berikan informasi tambahan kepada AI untuk hasil yang lebih baik.
-5.  **Mulai Terjemahkan**: Klik tombolnya dan saksikan prosesnya berjalan secara real-time di sidebar log.
-6.  **Unduh Hasil**: Setelah proses selesai, sebuah tombol unduh akan muncul secara otomatis.
+1. Unggah file `.ass` episode yang sama.
+2. Pilih bahasa sumber dan target.
+3. Pilih model AI.
+4. Opsional: masukkan ringkasan konteks dari Langkah 1.
+5. Klik **Mulai Terjemahkan**.
+6. Saksikan proses live di sidebar log dan unduh file `.ass` hasil terjemahan setelah selesai.
 
 ## Perbandingan dengan Versi Lama (`Gemini-TXT-Translator`)
 
 | Fitur                 | Gemini-TXT-Translator (Lama)                                             | AI Subtitle Translator (Baru)                                                              |
 | :-------------------- | :----------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
 | **Proses Kerja** | Manual: Ekstrak dialog ke `.txt`, terjemahkan, lalu masukkan kembali.      | **Otomatis**: Unggah file `.ass`, terjemahkan, dan unduh file `.ass` yang sudah jadi.      |
-| **Konteks Subtitle** | Semua timing, style, dan efek **hilang** saat diekstrak ke `.txt`.         | Semua timing, style, dan efek **100% terjaga**.                                            |
-| **Efisiensi** | Menerjemahkan **baris per baris**, sangat lambat dan banyak panggilan API. | Menerjemahkan dalam **batch (100 baris)**, lebih cepat dan efisien.                        |
-| **Feedback Proses** | Tidak ada. Hanya bisa menunggu hingga semua baris selesai.                | **Live Log**: Memberikan update status untuk setiap langkah.                               |
-| **Antarmuka** | Tidak ada. Proses berbasis file manual.                                  | **Antarmuka Web Interaktif** dari Gradio.                                                  |
+| **Konteks Subtitle** | Semua timing, style, dan efek **hilang** saat diekstrak ke `.txt`.         | Semua timing, style, dan efek **100% terjaga**. Bisa menambahkan **konteks episode**.     |
+| **Efisiensi** | Menerjemahkan **baris per baris**, lambat dan banyak panggilan API. | Terjemahkan dalam **batch**, lebih cepat dan efisien.                                       |
+| **Feedback Proses** | Tidak ada. | **Live Log**: Memberikan update status untuk setiap langkah.                               |
+| **Antarmuka** | Tidak ada. | **Antarmuka Web Interaktif** dari Gradio.                                                  |
 
 ## Teknologi yang Digunakan
 
